@@ -10,11 +10,16 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import javax.inject.Inject;
+
 import demo.catalog.coursera.org.courserademoapp.R;
 import demo.catalog.coursera.org.courserademoapp.domain.Course;
 import demo.catalog.coursera.org.courserademoapp.network.CourseraNetworkServiceImpl;
 
 public class CatalogAdapter extends ArrayAdapter<Course> {
+
+    @Inject
+    LayoutInflater mInflater;
 
     public CatalogAdapter(Context context) {
         super(context, R.layout.catalog_list_item);

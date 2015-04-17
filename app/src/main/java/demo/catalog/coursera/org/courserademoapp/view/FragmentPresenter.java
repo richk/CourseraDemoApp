@@ -5,6 +5,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 public abstract class FragmentPresenter<P, T extends P> implements Presenter<P,T> {
     public static final String ARG_FRAGMENT_ID = "simple_presenter_base_fragment_id";
     private final String DATA_FRAGMENT_TAG = "simple_presenter_base_data_fragment";
@@ -17,14 +20,13 @@ public abstract class FragmentPresenter<P, T extends P> implements Presenter<P,T
                                boolean isExisted) {
         mIsExisted = isExisted;
         mArguments = arguments;
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        DataFragment dataFragment = (DataFragment) fragmentManager.findFragmentByTag(
+        DataFragment dataFragment = (DataFragment) activity.getSupportFragmentManager().findFragmentByTag(
                 DATA_FRAGMENT_TAG);
         String dataKey = TextUtils.isEmpty(arguments.getString(ARG_FRAGMENT_ID)) ?
                 CLASS_NAME : arguments.getString(ARG_FRAGMENT_ID);
         if (dataFragment == null) {
             dataFragment = new DataFragment();
-            fragmentManager.beginTransaction().add(dataFragment, DATA_FRAGMENT_TAG).commit();
+            activity.getSupportFragmentManager().beginTransaction().add(dataFragment, DATA_FRAGMENT_TAG).commit();
             mData = data;
             dataFragment.setData(dataKey, mData);
         } else {

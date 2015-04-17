@@ -6,22 +6,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.inject.Inject;
+
 import demo.catalog.coursera.org.courserademoapp.R;
+import demo.catalog.coursera.org.courserademoapp.di.CatalogModule;
 import demo.catalog.coursera.org.courserademoapp.domain.Course;
 import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesViewModel;
 import rx.Subscription;
 import rx.functions.Action1;
 
 
-public class CatalogActivity extends ActionBarActivity {
+public class CatalogActivity extends BaseActivity {
 
     private ListView mCatalogList;
 
     private CatalogAdapter mAdapter;
-    private CatalogPresenter mPresenter;
+    @Inject
+    CatalogPresenter mPresenter;
     private CoursesViewModel mViewModel;
     private Subscription mCoursesSubscription;
 
@@ -32,10 +37,6 @@ public class CatalogActivity extends ActionBarActivity {
         mCatalogList = (ListView) findViewById(android.R.id.list);
         mAdapter = new CatalogAdapter(getApplicationContext());
         mCatalogList.setAdapter(mAdapter);
-        Bundle args = new Bundle();
-        args.putString(CatalogPresenter.ARG_FRAGMENT_ID,
-                UUID.randomUUID().toString());
-        mPresenter = new CatalogPresenter(this, args, savedInstanceState != null);
         mViewModel = mPresenter.getViewModel();
         mPresenter.refresh();
     }
@@ -81,5 +82,12 @@ public class CatalogActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected List<Object> getModules() {
+        LinkedList<Object> modules = new LinkedList<>();
+        modules.add(new CatalogModule());
+        return modules;
     }
 }

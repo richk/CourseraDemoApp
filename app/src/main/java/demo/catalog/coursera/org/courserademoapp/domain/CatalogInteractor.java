@@ -5,6 +5,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import demo.catalog.coursera.org.courserademoapp.network.CourseraNetworkService;
 import demo.catalog.coursera.org.courserademoapp.network.CourseraNetworkServiceImpl;
 import demo.catalog.coursera.org.courserademoapp.network.JSCourse;
@@ -14,6 +16,13 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 
 public class CatalogInteractor implements Interactor {
+
+    @Inject
+    public CatalogInteractor() {
+
+    }
+
+    
     @Override
     public Observable<List<Course>> getCourseObservable() {
         CourseraNetworkService networkService = CourseraNetworkServiceImpl.getInstance();
