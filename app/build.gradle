@@ -29,4 +29,6 @@ dependencies {
     compile files('libs/dexmaker-mockito-1.0.jar')
     compile files('libs/mockito-all-1.9.5.jar')
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile group: 'com.squareup.dagger', name: 'dagger', version: '1.2.2'
+    compile group: 'com.squareup.dagger', name: 'dagger-compiler', version: '1.2.2'
 }
