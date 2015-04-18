@@ -18,7 +18,6 @@ public class CourseraNetworkServiceImpl implements CourseraNetworkService {
     private RestAdapter catalogRestAdapter = new RestAdapter.Builder()
             .setEndpoint("https://api.coursera.org")
             .setConverter(new GsonConverter(new Gson()))
-            .setLogLevel(RestAdapter.LogLevel.FULL)
             .build();
 
     public static CourseraNetworkServiceImpl getInstance() {
