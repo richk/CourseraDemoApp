@@ -2,6 +2,7 @@ package demo.catalog.coursera.org.courserademoapp.view;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -15,6 +16,7 @@ import javax.inject.Inject;
 import demo.catalog.coursera.org.courserademoapp.R;
 import demo.catalog.coursera.org.courserademoapp.di.CatalogModule;
 import demo.catalog.coursera.org.courserademoapp.domain.Course;
+import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesParcelableViewModel;
 import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesViewModel;
 import rx.Subscription;
 import rx.functions.Action1;
@@ -24,39 +26,46 @@ public class CatalogActivity extends BaseActivity {
 
     private ListView mCatalogList;
 
-    private CatalogAdapter mAdapter;
+    @Inject
+    CatalogAdapter mAdapter;
+
     @Inject
     CatalogPresenter mPresenter;
-    private CoursesViewModel mViewModel;
-    private Subscription mCoursesSubscription;
+
+    private Subscription mViewModelSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
         mCatalogList = (ListView) findViewById(android.R.id.list);
-        mAdapter = new CatalogAdapter(getApplicationContext());
         mCatalogList.setAdapter(mAdapter);
-        mViewModel = mPresenter.getViewModel();
-        mPresenter.refresh();
+        mPresenter.load(savedInstanceState);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mCoursesSubscription.unsubscribe();
+        mViewModelSubscription.unsubscribe();
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mPresenter.onSave(outState);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.refresh();
-        mCoursesSubscription = mViewModel.subscribeToCourseList(new Action1<List<Course>>() {
+        mViewModelSubscription = mPresenter.subscribeToViewModel(new Action1<CoursesParcelableViewModel>() {
             @Override
-            public void call(List<Course> courses) {
-                mAdapter.clear();
-                mAdapter.addAll(courses);
+            public void call(CoursesParcelableViewModel viewModel) {
+                List<Course> courses = viewModel.courseList();
+                Log.d("CatalogActivity", "Number of courses:" + courses.size());
+                Log.d("CatalogActivity", "First Course:" + courses.get(0).shortName);
+                mAdapter.setCourses(courses);
                 mAdapter.notifyDataSetChanged();
             }
         });

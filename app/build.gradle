@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 21
@@ -31,4 +32,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile group: 'com.squareup.dagger', name: 'dagger', version: '1.2.2'
     compile group: 'com.squareup.dagger', name: 'dagger-compiler', version: '1.2.2'
+    compile 'com.github.frankiesardo:auto-parcel:0.3'
+    apt 'com.github.frankiesardo:auto-parcel-processor:0.3'
 }
