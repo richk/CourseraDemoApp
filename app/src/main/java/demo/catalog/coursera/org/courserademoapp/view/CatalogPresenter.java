@@ -14,6 +14,7 @@ import javax.inject.Named;
 import auto.parcel.AutoParcel;
 import demo.catalog.coursera.org.courserademoapp.domain.CatalogInteractor;
 import demo.catalog.coursera.org.courserademoapp.domain.Course;
+import demo.catalog.coursera.org.courserademoapp.viewmodel.Address;
 import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesParcelableViewModel;
 import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesViewModel;
 import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesViewModelImpl;
@@ -65,5 +66,9 @@ public class CatalogPresenter {
 
     public Subscription subscribeToViewModel(Action1<CoursesParcelableViewModel> viewModelAction) {
         return mViewModelSubject.subscribe(viewModelAction);
+    }
+
+    public Subscription subscribeToCourseList(Action1<List<Course>> courseListAction) {
+        return mViewModel.subscribeToCourseList(courseListAction);
     }
 }

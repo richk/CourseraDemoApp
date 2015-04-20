@@ -1,5 +1,7 @@
 package demo.catalog.coursera.org.courserademoapp.view;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +46,24 @@ public class CatalogActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mViewModelSubscription = mPresenter.subscribeToViewModel(new Action1<CoursesParcelableViewModel>() {
+            @Override
+            public void call(CoursesParcelableViewModel viewModel) {
+                final List<Course> courses = viewModel.courseList();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter.setCourses(courses);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         mViewModelSubscription.unsubscribe();
@@ -57,39 +77,13 @@ public class CatalogActivity extends BaseActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        mViewModelSubscription = mPresenter.subscribeToViewModel(new Action1<CoursesParcelableViewModel>() {
-            @Override
-            public void call(CoursesParcelableViewModel viewModel) {
-                List<Course> courses = viewModel.courseList();
-                Log.d("CatalogActivity", "Number of courses:" + courses.size());
-                Log.d("CatalogActivity", "First Course:" + courses.get(0).shortName);
-                mAdapter.setCourses(courses);
-                mAdapter.notifyDataSetChanged();
-            }
-        });
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_catalog, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 

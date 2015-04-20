@@ -30,7 +30,6 @@ public class CatalogAdapter extends ArrayAdapter<Course> {
     @Inject
     public CatalogAdapter(@Named("application") Context context) {
         super(context, R.layout.catalog_list_item);
-        Log.d("CatalogAdapter", "CatalogAdapter");
     }
 
     @Override
@@ -43,14 +42,13 @@ public class CatalogAdapter extends ArrayAdapter<Course> {
     }
 
     public void setCourses(List<Course> courses) {
-        clear();
         mCourses = courses;
+        clear();
         addAll(courses);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.d("CatalogAdapter", "getView");
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.catalog_list_item, parent,
                     false);
@@ -60,7 +58,6 @@ public class CatalogAdapter extends ArrayAdapter<Course> {
             convertView.setTag(courseItemHolder);
         }
         Course course = getItem(position);
-        Log.d("CatalogAdapter", "Course:" + course.shortName);
         CourseItemHolder holder = (CourseItemHolder)convertView.getTag();
         holder.tvCourse.setText(course.name);
         Picasso.with(getContext()).load(course.smallIcon).into(holder.imgCourse);
