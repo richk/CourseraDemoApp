@@ -6,6 +6,7 @@ import java.util.List;
 
 import dagger.ObjectGraph;
 import demo.catalog.coursera.org.courserademoapp.di.ApplicationModule;
+import demo.catalog.coursera.org.courserademoapp.network.NetworkingModule;
 
 public class CourseraDemoApplication extends Application {
     private ObjectGraph objectGraph;
@@ -35,7 +36,7 @@ public class CourseraDemoApplication extends Application {
     }
 
     private void initializeDependencyInjector() {
-        objectGraph = ObjectGraph.create(new ApplicationModule(this));
+        objectGraph = ObjectGraph.create(new ApplicationModule(this), new NetworkingModule());
         objectGraph.inject(this);
         objectGraph.injectStatics();
     }

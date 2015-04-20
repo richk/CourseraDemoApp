@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
 import retrofit.http.GET;
@@ -20,14 +22,7 @@ public class CourseraNetworkServiceImpl implements CourseraNetworkService {
             .setConverter(new GsonConverter(new Gson()))
             .build();
 
-    public static CourseraNetworkServiceImpl getInstance() {
-        if (mCourseraNetworkService == null) {
-            mCourseraNetworkService = new CourseraNetworkServiceImpl();
-        }
-        return mCourseraNetworkService;
-    }
-
-    private CourseraNetworkServiceImpl() {
+    public CourseraNetworkServiceImpl() {
         mCatalogAPIService = catalogRestAdapter.create(CatalogAPIService.class);
 
     }

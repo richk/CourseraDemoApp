@@ -8,7 +8,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import demo.catalog.coursera.org.courserademoapp.network.CourseraNetworkService;
-import demo.catalog.coursera.org.courserademoapp.network.CourseraNetworkServiceImpl;
 import demo.catalog.coursera.org.courserademoapp.network.JSCourse;
 import demo.catalog.coursera.org.courserademoapp.network.JSCourseResponse;
 import rx.Observable;
@@ -18,15 +17,16 @@ import rx.functions.Func1;
 public class CatalogInteractor implements Interactor {
 
     @Inject
+    CourseraNetworkService mNetworkService;
+
+    @Inject
     public CatalogInteractor() {
 
     }
 
-    
     @Override
     public Observable<List<Course>> getCourseObservable() {
-        CourseraNetworkService networkService = CourseraNetworkServiceImpl.getInstance();
-        Observable<List<Course>> courseListObservable = networkService.getCourses()
+        Observable<List<Course>> courseListObservable = mNetworkService.getCourses()
                 .map(new Func1<JSCourseResponse, List<Course>>() {
                     @Override
                     public List<Course> call(JSCourseResponse jsCourseResponse) {
