@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,7 +20,6 @@ import javax.inject.Named;
 
 import demo.catalog.coursera.org.courserademoapp.R;
 import demo.catalog.coursera.org.courserademoapp.domain.Course;
-import demo.catalog.coursera.org.courserademoapp.network.CourseraNetworkServiceImpl;
 
 public class CatalogAdapter extends ArrayAdapter<Course> {
 
@@ -28,7 +29,7 @@ public class CatalogAdapter extends ArrayAdapter<Course> {
     LayoutInflater mInflater;
 
     @Inject
-    public CatalogAdapter(@Named("application") Context context) {
+    public CatalogAdapter(@Named("activity") Context context) {
         super(context, R.layout.catalog_list_item);
     }
 
@@ -50,7 +51,7 @@ public class CatalogAdapter extends ArrayAdapter<Course> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.catalog_list_item, parent,
+            convertView = mInflater.inflate(R.layout.catalog_list_item, parent,
                     false);
             CourseItemHolder courseItemHolder = new CourseItemHolder();
             courseItemHolder.tvCourse = (TextView) convertView.findViewById(R.id.course_name);

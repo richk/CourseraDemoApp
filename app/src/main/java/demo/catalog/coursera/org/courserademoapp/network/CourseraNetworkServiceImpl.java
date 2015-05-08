@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import demo.catalog.coursera.org.courserademoapp.BuildConfig;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
 import retrofit.http.GET;
@@ -13,18 +14,18 @@ import rx.Observable;
 
 public class CourseraNetworkServiceImpl implements CourseraNetworkService {
 
-    private static CourseraNetworkServiceImpl mCourseraNetworkService;
-
     public CatalogAPIService mCatalogAPIService;
 
-    private RestAdapter catalogRestAdapter = new RestAdapter.Builder()
-            .setEndpoint("https://api.coursera.org")
-            .setConverter(new GsonConverter(new Gson()))
-            .build();
+    RestAdapter catalogRestAdapter;
 
     public CourseraNetworkServiceImpl() {
+        catalogRestAdapter = new RestAdapter.Builder()
+                .setEndpoint("https://api.coursera.org")
+                .setConverter(new GsonConverter(new Gson()))
+                .setLogLevel((BuildConfig.DEBUG ?
+                        RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE))
+                .build();
         mCatalogAPIService = catalogRestAdapter.create(CatalogAPIService.class);
-
     }
 
     @Override

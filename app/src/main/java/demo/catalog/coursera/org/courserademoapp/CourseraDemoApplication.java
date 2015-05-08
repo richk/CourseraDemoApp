@@ -6,7 +6,7 @@ import java.util.List;
 
 import dagger.ObjectGraph;
 import demo.catalog.coursera.org.courserademoapp.di.ApplicationModule;
-import demo.catalog.coursera.org.courserademoapp.network.NetworkingModule;
+import demo.catalog.coursera.org.courserademoapp.di.NetworkingModule;
 
 public class CourseraDemoApplication extends Application {
     private ObjectGraph objectGraph;

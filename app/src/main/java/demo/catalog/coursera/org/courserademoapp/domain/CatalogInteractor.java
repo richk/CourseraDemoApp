@@ -26,7 +26,7 @@ public class CatalogInteractor implements Interactor {
 
     @Override
     public Observable<List<Course>> getCourseObservable() {
-        Observable<List<Course>> courseListObservable = mNetworkService.getCourses()
+            Observable<List<Course>> courseListObservable = mNetworkService.getCourses()
                 .map(new Func1<JSCourseResponse, List<Course>>() {
                     @Override
                     public List<Course> call(JSCourseResponse jsCourseResponse) {
