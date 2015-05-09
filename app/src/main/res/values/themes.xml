@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    !-- the theme applied to the application or activity -->
+    <style name="CourseraActionBarTheme"
+        parent="@style/Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/CourseraActionBar</item>
+    </style>
+
+    !-- ActionBar styles -->
+    <style name="CourseraActionBar"
+        parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="background">@drawable/ab_solid_courseraactionbar</item>
+    </style>
+
+
+</resources>
