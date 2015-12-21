@@ -8,10 +8,6 @@ import demo.catalog.coursera.org.courserademoapp.view.CatalogActivity;
 public class CatalogFlowController {
     private static CatalogFlowController mFlowController;
 
-    private CatalogFlowController() {
-
-    }
-
     public static CatalogFlowController getInstance() {
         if (mFlowController == null) {
             mFlowController = new CatalogFlowController();
