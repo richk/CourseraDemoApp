@@ -2,6 +2,7 @@ package demo.catalog.coursera.org.courserademoapp.view;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import demo.catalog.coursera.org.courserademoapp.CourseraDemoApplication;
 import demo.catalog.coursera.org.courserademoapp.di.ActivityModule;
 import demo.catalog.coursera.org.courserademoapp.di.CatalogModule;
 
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     private ObjectGraph activityScopeGraph;
 
