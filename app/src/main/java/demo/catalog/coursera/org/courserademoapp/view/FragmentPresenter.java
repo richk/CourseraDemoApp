@@ -2,13 +2,9 @@ package demo.catalog.coursera.org.courserademoapp.view;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
-public abstract class FragmentPresenter<P, T extends P> implements Presenter<P,T> {
+public abstract class FragmentPresenter<P, T extends P> implements OldPresenter<P,T> {
     public static final String ARG_FRAGMENT_ID = "simple_presenter_base_fragment_id";
     private final String DATA_FRAGMENT_TAG = "simple_presenter_base_data_fragment";
     private final String CLASS_NAME = ((Object) this).getClass().getCanonicalName();

@@ -1,20 +1,12 @@
 package demo.catalog.coursera.org.courserademoapp.view;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -22,7 +14,6 @@ import demo.catalog.coursera.org.courserademoapp.R;
 import demo.catalog.coursera.org.courserademoapp.di.CatalogModule;
 import demo.catalog.coursera.org.courserademoapp.domain.Course;
 import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesParcelableViewModel;
-import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesViewModel;
 import rx.Subscription;
 import rx.functions.Action1;
 
@@ -45,13 +36,13 @@ public class CatalogActivity extends BaseActivity {
         setContentView(R.layout.activity_catalog);
         mCatalogList = (ListView) findViewById(android.R.id.list);
         mCatalogList.setAdapter(mAdapter);
-        mPresenter.load(savedInstanceState);
+        mPresenter.onCreate(savedInstanceState);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mViewModelSubscription = mPresenter.subscribeToViewModel(new Action1<CoursesParcelableViewModel>() {
+        mViewModelSubscription = mPresenter.onResume(new Action1<CoursesParcelableViewModel>() {
             @Override
             public void call(CoursesParcelableViewModel viewModel) {
                 final List<Course> courses = viewModel.courseList();
@@ -76,7 +67,7 @@ public class CatalogActivity extends BaseActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mPresenter.onSave(outState);
+        mPresenter.onPause(outState);
     }
 
     @Override
