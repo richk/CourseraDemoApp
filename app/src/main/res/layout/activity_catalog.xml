@@ -2,11 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/root"
+    android:background="@color/backgroundLight"
     tools:context=".CatalogActivity">
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@id/android:list"
-        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:dividerHeight="10dp"
         android:divider="@android:color/transparent"
         android:scrollbarStyle="outsideOverlay"

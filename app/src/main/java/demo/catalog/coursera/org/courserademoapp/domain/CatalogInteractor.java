@@ -40,6 +40,7 @@ public class CatalogInteractor implements Interactor {
                             course.smallIcon = jsCourse.smallIcon;
                             courses.add(course);
                         }
+                        courses.remove(0);
                         return courses;
                     }
                 }).doOnError(new Action1<Throwable>() {

@@ -2,7 +2,7 @@
 <resources>
     <color name="card_blue">#4285F4</color>
     <color name="card_blue_dark">#4748FF</color>
-    <color name="backgroundLight">#F9FAF7</color>
+    <color name="backgroundLight">#FFF3F3F3</color>
     <color name="backgroundWhite">#FFFFFF</color>
     <color name="primaryTextColor">#FFFFFF</color>
 </resources>
