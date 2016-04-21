@@ -33,11 +33,8 @@ public class CatalogInteractor implements Interactor {
                         JSCourse[] jsCourses = jsCourseResponse.elements;
                         List<Course> courses = new ArrayList<Course>();
                         for (JSCourse jsCourse : jsCourses) {
-                            Course course = new Course();
-                            course.id = jsCourse.id;
-                            course.name = jsCourse.name;
-                            course.shortName = jsCourse.shortName;
-                            course.smallIcon = jsCourse.smallIcon;
+                            Course course = Course.create(jsCourse.id, jsCourse.name,
+                                    jsCourse.shortName, jsCourse.smallIcon);
                             courses.add(course);
                         }
                         courses.remove(0);

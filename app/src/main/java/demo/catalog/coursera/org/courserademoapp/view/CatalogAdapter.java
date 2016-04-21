@@ -60,8 +60,8 @@ public class CatalogAdapter extends ArrayAdapter<Course> {
         }
         Course course = getItem(position);
         CourseItemHolder holder = (CourseItemHolder)convertView.getTag();
-        holder.tvCourse.setText(course.name);
-        Picasso.with(getContext()).load(course.smallIcon).into(holder.imgCourse);
+        holder.tvCourse.setText(course.name());
+        Picasso.with(getContext()).load(course.smallIcon()).into(holder.imgCourse);
         return convertView;
     }
 
