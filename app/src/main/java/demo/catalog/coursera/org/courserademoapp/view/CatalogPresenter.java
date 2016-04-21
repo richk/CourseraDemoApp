@@ -12,7 +12,6 @@ import javax.inject.Named;
 import demo.catalog.coursera.org.courserademoapp.domain.CatalogInteractor;
 import demo.catalog.coursera.org.courserademoapp.domain.Course;
 import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesParcelableViewModel;
-import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesViewModel;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -34,7 +33,7 @@ public class CatalogPresenter implements Presenter {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            mViewModel = savedInstanceState.getParcelable(CoursesViewModel.class.getSimpleName());
+            mViewModel = savedInstanceState.getParcelable(CoursesParcelableViewModel.class.getSimpleName());
         }
     }
 
@@ -52,7 +51,7 @@ public class CatalogPresenter implements Presenter {
 
     @Override
     public void onPause(Bundle savedInstanceState) {
-        savedInstanceState.putParcelable(CoursesViewModel.class.getSimpleName(), mViewModel);
+        savedInstanceState.putParcelable(CoursesParcelableViewModel.class.getSimpleName(), mViewModel);
     }
 
     private void refresh() {
