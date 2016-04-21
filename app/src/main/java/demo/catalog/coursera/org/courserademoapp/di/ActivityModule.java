@@ -8,10 +8,6 @@ import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
-import demo.catalog.coursera.org.courserademoapp.view.BaseActivity;
-import demo.catalog.coursera.org.courserademoapp.view.CatalogActivity;
-import demo.catalog.coursera.org.courserademoapp.view.CatalogPresenter;
-import demo.catalog.coursera.org.courserademoapp.view.FragmentPresenter;
 
 @Module(
         injects = {

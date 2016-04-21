@@ -1,4 +1,4 @@
-package demo.catalog.coursera.org.courserademoapp.presenter;
+package demo.catalog.coursera.org.courserademoapp.view;
 
 import android.os.Bundle;
 

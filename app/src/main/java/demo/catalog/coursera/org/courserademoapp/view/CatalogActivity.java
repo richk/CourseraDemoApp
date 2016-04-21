@@ -46,13 +46,8 @@ public class CatalogActivity extends BaseActivity {
             @Override
             public void call(CoursesParcelableViewModel viewModel) {
                 final List<Course> courses = viewModel.courseList();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter.setCourses(courses);
-                        mAdapter.notifyDataSetChanged();
-                    }
-                });
+                mAdapter.setCourses(courses);
+                mAdapter.notifyDataSetChanged();
             }
         });
     }
