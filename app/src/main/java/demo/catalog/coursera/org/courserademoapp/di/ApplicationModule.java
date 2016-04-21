@@ -4,17 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import demo.catalog.coursera.org.courserademoapp.CourseraDemoApplication;
+import demo.catalog.coursera.org.courserademoapp.flowcontroller.FlowController;
 import demo.catalog.coursera.org.courserademoapp.view.CatalogActivity;
 
 
-@Module(
-        injects = {
-                CourseraDemoApplication.class
-        }, library = true)
+@Module
 public final class ApplicationModule {
     private final Context context;
 
@@ -23,12 +22,8 @@ public final class ApplicationModule {
     }
 
     @Provides @Named("application")
+    @Singleton
     Context provideApplicationContext() {
         return context;
-    }
-
-    @Provides
-    LayoutInflater provideLayoutInflater() {
-        return LayoutInflater.from(context);
     }
 }

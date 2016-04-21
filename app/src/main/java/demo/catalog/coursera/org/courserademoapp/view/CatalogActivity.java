@@ -5,13 +5,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import demo.catalog.coursera.org.courserademoapp.CourseraDemoApplication;
 import demo.catalog.coursera.org.courserademoapp.R;
+import demo.catalog.coursera.org.courserademoapp.di.CatalogComponent;
 import demo.catalog.coursera.org.courserademoapp.di.CatalogModule;
+import demo.catalog.coursera.org.courserademoapp.di.DaggerCatalogComponent;
 import demo.catalog.coursera.org.courserademoapp.domain.Course;
 import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesParcelableViewModel;
 import rx.Subscription;
@@ -21,6 +23,8 @@ import rx.functions.Action1;
 public class CatalogActivity extends BaseActivity {
 
     private ListView mCatalogList;
+
+    private CatalogComponent mCatalogComponent;
 
     @Inject
     CatalogAdapter mAdapter;
@@ -34,6 +38,12 @@ public class CatalogActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
+        mCatalogComponent = DaggerCatalogComponent.builder()
+                .applicationComponent(((CourseraDemoApplication) getApplication()).getAppComponent())
+                .catalogModule(new CatalogModule(this))
+                .build();
+        mCatalogComponent.inject(this);
+
         mCatalogList = (ListView) findViewById(android.R.id.list);
         mCatalogList.setAdapter(mAdapter);
         mPresenter.onCreate(savedInstanceState);
@@ -74,12 +84,5 @@ public class CatalogActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected List<Object> getModules() {
-        LinkedList<Object> modules = new LinkedList<>();
-        modules.add(new CatalogModule());
-        return modules;
     }
 }

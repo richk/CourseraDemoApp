@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import demo.catalog.coursera.org.courserademoapp.domain.CatalogInteractor;
 import demo.catalog.coursera.org.courserademoapp.domain.Course;
+import demo.catalog.coursera.org.courserademoapp.network.CourseraNetworkService;
 import demo.catalog.coursera.org.courserademoapp.viewmodel.CoursesParcelableViewModel;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -19,15 +20,14 @@ import rx.subjects.BehaviorSubject;
 
 public class CatalogPresenter implements Presenter {
 
-    @Inject
     CatalogInteractor mInteractor;
 
     CoursesParcelableViewModel mViewModel;
 
     BehaviorSubject<CoursesParcelableViewModel> mViewModelSubject = BehaviorSubject.create();
 
-    @Inject
-    public CatalogPresenter(@Named("activity") Context context) {
+    public CatalogPresenter(CatalogInteractor interactor) {
+        mInteractor = interactor;
     }
 
     @Override

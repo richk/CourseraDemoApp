@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FlowController.getInstance().launchCatalogActivity(this);
+        FlowController.launchCatalogActivity(this);
     }
 
 

@@ -16,13 +16,12 @@ import rx.functions.Func1;
 
 public class CatalogInteractor implements Interactor {
 
-    @Inject
     CourseraNetworkService mNetworkService;
 
-    @Inject
-    public CatalogInteractor() {
-
+    public CatalogInteractor(CourseraNetworkService networkService) {
+        mNetworkService = networkService;
     }
+
 
     @Override
     public Observable<List<Course>> getCourseObservable() {

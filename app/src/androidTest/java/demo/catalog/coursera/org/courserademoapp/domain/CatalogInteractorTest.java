@@ -24,7 +24,7 @@ public class CatalogInteractorTest extends TestCase {
         course.name = "Test Course";
         course.shortName = "test";
         courses[0] = course;
-        mockJSResponse.courseList = courses;
+        mockJSResponse.elements = courses;
         CourseraNetworkServiceImpl mockNetworkService = mock(CourseraNetworkServiceImpl.class);
         when(mockNetworkService.getCourses()).thenReturn(Observable.just(mockJSResponse));
 
@@ -32,7 +32,7 @@ public class CatalogInteractorTest extends TestCase {
             @Override
             public void call(JSCourseResponse jsCourseResponse) {
                 assertNotNull(jsCourseResponse);
-                assertEquals(1, jsCourseResponse.courseList.length);
+                assertEquals(1, jsCourseResponse.elements.length);
             }
         });
     }

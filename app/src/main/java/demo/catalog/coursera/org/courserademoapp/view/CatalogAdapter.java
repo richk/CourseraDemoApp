@@ -25,12 +25,11 @@ public class CatalogAdapter extends ArrayAdapter<Course> {
 
     List<Course> mCourses;
 
-    @Inject
     LayoutInflater mInflater;
 
-    @Inject
-    public CatalogAdapter(@Named("activity") Context context) {
+    public CatalogAdapter(Context context, LayoutInflater inflater) {
         super(context, R.layout.catalog_list_item);
+        mInflater = inflater;
     }
 
     @Override
