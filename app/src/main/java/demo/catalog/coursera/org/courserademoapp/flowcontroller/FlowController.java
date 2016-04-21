@@ -5,16 +5,16 @@ import android.content.Intent;
 
 import demo.catalog.coursera.org.courserademoapp.view.CatalogActivity;
 
-public class CatalogFlowController {
-    private static CatalogFlowController mFlowController;
+public class FlowController {
+    private static FlowController mFlowController;
 
-    private CatalogFlowController() {
+    private FlowController() {
 
     }
 
-    public static CatalogFlowController getInstance() {
+    public static FlowController getInstance() {
         if (mFlowController == null) {
-            mFlowController = new CatalogFlowController();
+            mFlowController = new FlowController();
         }
 
         return mFlowController;
